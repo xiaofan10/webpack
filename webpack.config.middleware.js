@@ -1,5 +1,5 @@
 /**
- * 该配置文件可以单独使用 server.js 是配合中间件配置文件使用的
+ * 利用中间件在node js服务器上做缓存
  */
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -10,7 +10,8 @@ module.exports = {
   entry: './src/index.js', // 单页面应用
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'index.js'
+    filename: 'index.js',
+    publicPath: '/'
   },
   devtool: 'inline-source-map',
   module: {
@@ -35,9 +36,6 @@ module.exports = {
         ]
       }
     ]
-  },
-  devServer: {
-    contentBase: './dist'
   },
   plugins: [
     new CleanWebpackPlugin(['dist']),
