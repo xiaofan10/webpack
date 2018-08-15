@@ -1,19 +1,15 @@
-/**
- * 利用中间件在node js服务器上做缓存
- */
 const path = require('path');
+const cleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
-  mode: 'production', // development
-  entry: './src/index.js', // 单页面应用
-  output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'index.js',
-    publicPath: '/'
+  entry: {
+    index: './src/index.js'
   },
-  devtool: 'inline-source-map',
+  output: {
+    filename: '[name].bundle.js',
+    path: path.resolve(__dirname, 'bundle')
+  },
   module: {
     rules: [
       {
@@ -22,6 +18,11 @@ module.exports = {
           'style-loader',
           'css-loader'
         ]
+      },
+      {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/
       },
       {
         test: /\.(png|svg|jpg|gif)$/,
@@ -37,10 +38,13 @@ module.exports = {
       }
     ]
   },
+  resolve: {
+    extensions: ['tsx', '.ts', '.js']
+  },
   plugins: [
-    new CleanWebpackPlugin(['dist']),
+    new cleanWebpackPlugin(['dist']),
     new HtmlWebpackPlugin({
-      title: 'Output Management'
+      title: 'ts'
     })
   ]
-}
+};
