@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: {
-    index: './src/index.js'
+    index: './src/index.tsx'
   },
   output: {
     filename: '[name].bundle.js',
@@ -19,6 +19,15 @@ module.exports = {
           'css-loader'
         ]
       },
+      // {
+      //   test: /\.tsx?$/,
+      //   loader: "awesome-typescript-loader"
+      // },
+      // {
+      //   enforce: "pre",
+      //   test: /\.js$/,
+      //   loader: "source-map-loader"
+      // },
       {
         test: /\.tsx?$/,
         use: 'ts-loader',
